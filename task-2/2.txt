@@ -11,6 +11,8 @@ const animal = {
 const dog = Object.create(animal);
 dog.name = 'Buddy';
 dog.speak(); // Buddy makes a noise.
+
+
 Using Classes (ES6):
 javascript
 CopyEdit
@@ -79,16 +81,38 @@ function* counter() {
 const gen = counter();
 console.log(gen.next().value); // 0
 console.log(gen.next().value); // 1
+
+
 Symbols:
 javascript
 CopyEdit
-const sym1 = Symbol('id');
-const user = {
-  name: 'John',
-  [sym1]: 123
-};
+// Creating a Symbol with a description
+const uniqueKey = Symbol('uniqueKey');
 
-console.log(user[sym1]); // 123
+// Creating an object
+let myObject = {};
+
+// Assigning a value to the object using a Symbol as the key
+myObject[uniqueKey] = 'This is a unique value';
+
+// Accessing the value using the Symbol
+console.log(myObject[uniqueKey]);  // Output: "This is a unique value"
+
+// Checking if the Symbol key exists in the object
+console.log(uniqueKey in myObject);  // Output: true
+
+// Symbols are unique, so creating a new Symbol with the same description won't match
+const anotherUniqueKey = Symbol('uniqueKey');
+console.log(uniqueKey === anotherUniqueKey);  // Output: false
+
+// Symbols are not enumerable in for...in loops or Object.keys
+for (let key in myObject) {
+  console.log(key); // No output, as Symbols don't show up here
+}
+
+// Using Object.getOwnPropertySymbols to retrieve Symbol keys
+console.log(Object.getOwnPropertySymbols(myObject));  // Output: [Symbol(uniqueKey)]
+
 ________________________________________
 e. Working with Closure
 Closure Example:
