@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Users</title>
+  </head>
+  <body>
+    <h2>User List</h2>
+    <form method="POST" action="/users">
+      <input name="name" placeholder="Name" required />
+      <input name="email" placeholder="Email" required />
+      <button type="submit">Add User</button>
+    </form>
+    <table border="1" style="margin-top: 10px">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+      </tr>
+      <% users.forEach(user => { %>
+      <tr>
+        <td><%= user.id %></td>
+        <td><%= user.name %></td>
+        <td><%= user.email %></td>
+      </tr>
+      <% }) %>
+    </table>
+  </body>
+</html>
