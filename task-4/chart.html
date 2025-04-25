@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Weather Chart</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <h2>Weather Bar Chart</h2>
+  <input type="text" id="city" placeholder="Enter city" />
+  <button onclick="drawChart()">Draw Chart</button>
+  <canvas id="weatherChart" width="400" height="200"></canvas>
+
+  <script>
+    async function drawChart() {
+      const city = document.getElementById("city").value;
+      const apiKey = "YOUR_API_KEY"; // Replace with your OpenWeatherMap API key
+      const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${apiKey}`;
+
+      const res = await fetch(url);
+      const data = await res.json();
+
+      const dates = [];
+      const temps = [];
+
+      data.list.filter((_, i) => i % 8 === 0).forEach(item => {
+        dates.push(new Date(item.dt_txt).toLocaleDateString());
+        temps.push(item.main.temp);
+      });
+
+      const ctx = document.getElementById('weatherChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: dates,
+          datasets: [{
+            label: 'Temp (°C)',
+            data: temps,
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+a. Working with Prototypal Inheritance and Classes
+Prototypal Inheritance Example:
+javascript
+CopyEdit
+const animal = {
+  speak() {
+    console.log(`${this.name} makes a noise.`);
+  }
+};
+
+const dog = Object.create(animal);
+dog.name = 'Buddy';
+dog.speak(); // Buddy makes a noise.
+Using Classes (ES6):
+javascript
+CopyEdit
+class Animal {
+  constructor(name) {
+    this.name = name;
+  }
+
+  speak() {
+    console.log(`${this.name} makes a noise.`);
+  }
+}
+
+class Dog extends Animal {
+  speak() {
+    console.log(`${this.name} barks.`);
+  }
+}
+
+const dog = new Dog('Rex');
+dog.speak(); // Rex barks.
+________________________________________
+b. Working with Object and Array Destructuring
+Object Destructuring:
+javascript
+CopyEdit
+const user = { name: 'Alice', age: 25, city: 'Paris' };
+const { name, age } = user;
+console.log(name, age); // Alice 25
+Array Destructuring:
+javascript
+CopyEdit
+const colors = ['red', 'green', 'blue'];
+const [first, , third] = colors;
+console.log(first, third); // red blue
+________________________________________
+c. Working with Modules
+Exporting from a module (math.js):
+javascript
+CopyEdit
+export function add(a, b) {
+  return a + b;
+}
+
+export const PI = 3.14;
+Importing in another file:
+javascript
+CopyEdit
+import { add, PI } from './math.js';
+
+console.log(add(5, 2)); // 7
+console.log(PI); // 3.14
+Use type="module" in your HTML script tag when using modules.
+________________________________________
+d. Working with Function Generators and Symbols
+Function Generator:
+javascript
+CopyEdit
+function* counter() {
+  let i = 0;
+  while (true) {
+    yield i++;
+  }
+}
+
+const gen = counter();
+console.log(gen.next().value); // 0
+console.log(gen.next().value); // 1
+Symbols:
+javascript
+CopyEdit
+const sym1 = Symbol('id');
+const user = {
+  name: 'John',
+  [sym1]: 123
+};
+
+console.log(user[sym1]); // 123
+________________________________________
+e. Working with Closure
+Closure Example:
+javascript
+CopyEdit
+
+
+function outer() {
+  let count = 0;
+
+  return function inner() {
+    count++;
+    console.log(`Count is ${count}`);
+  };
+}
+
+const counter = outer();
+counter(); // Count is 1
+counter(); // Count is 2

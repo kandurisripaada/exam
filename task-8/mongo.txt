@@ -1,0 +1,105 @@
+// Switch to (or create) a database named "myApp"
+use myApp
+
+// Insert sample documents into Users collection
+db.Users.insertMany([
+  { name: "Alice", age: 25, email: "alice@example.com", status: "active" },
+  { name: "Bob", age: 30, email: "bob@example.com", status: "inactive" },
+  { name: "Charlie", age: 35, email: "charlie@example.com", status: "active" },
+  { name: "David", age: 40, email: "david@example.com", status: "inactive" }
+])
+
+////////////////////
+
+// Find all users
+db.Users.find()
+
+// Find users with age greater than 30
+db.Users.find({ age: { $gt: 30 } })
+
+// Find users with age less than 35
+db.Users.find({ age: { $lt: 35 } })
+
+// Find users with age greater than or equal to 30
+db.Users.find({ age: { $gte: 30 } })
+
+// Find users with age less than or equal to 35
+db.Users.find({ age: { $lte: 35 } })
+
+// Find users whose name is exactly 'Alice'
+db.Users.find({ name: { $eq: "Alice" } })
+
+// Find users whose name is NOT 'Bob'
+db.Users.find({ name: { $ne: "Bob" } })
+
+// Find users whose status is either active or inactive
+db.Users.find({ status: { $in: ["active", "inactive"] } })
+
+// Find users whose status is not in the list
+db.Users.find({ status: { $nin: ["active"] } })
+
+///////////////////////////////
+
+// Update user's age by name
+db.Users.updateOne(
+  { name: "Alice" },
+  { $set: { age: 26 } }
+)
+
+// Update many users whose status is 'inactive' to 'pending'
+db.Users.updateMany(
+  { status: "inactive" },
+  { $set: { status: "pending" } }
+)
+
+
+///////////////////////////////////////////////
+
+// Delete a single user
+db.Users.deleteOne({ name: "David" })
+
+// Delete users older than 35
+db.Users.deleteMany({ age: { $gt: 35 } })
+/////////////////////////////////
+
+
+
+db.Users.find({
+  $and: [
+    { age: { $gt: 25 } },
+    { status: "active" }
+  ]
+})
+
+
+db.Users.find({
+  $or: [
+    { age: { $lt: 30 } },
+    { status: "pending" }
+  ]
+})
+
+
+db.Users.find({
+  age: { $not: { $gt: 30 } }
+})
+
+
+
+db.Users.find({
+  age: { $gte: 25, $lte: 35 }
+})
+
+
+
+db.Users.find({
+  $or: [
+    { name: "Alice" },
+    {
+      $and: [
+        { age: { $gt: 30 } },
+        { status: { $ne: "inactive" } }
+      ]
+    }
+  ]
+})

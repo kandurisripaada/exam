@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Weather Forecast</title>
+</head>
+<body>
+  <h2>5-Day Forecast</h2>
+  <input type="text" id="city" placeholder="Enter city" />
+  <button onclick="getForecast()">Get Forecast</button>
+  <table border="1" id="forecastTable">
+    <tr><th>Date</th><th>Temperature (°C)</th></tr>
+  </table>
+
+  <script>
+    async function getForecast() {
+      const city = document.getElementById("city").value;
+      const apiKey = "YOUR_API_KEY"; // Replace with your OpenWeatherMap API key
+      const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${apiKey}`;
+
+      const res = await fetch(url);
+      const data = await res.json();
+      const table = document.getElementById("forecastTable");
+      table.innerHTML = "<tr><th>Date</th><th>Temperature (°C)</th></tr>"; // Reset table
+      
+      // Show forecast every 8 steps (~once per day)
+      data.list.filter((_, i) => i % 8 === 0).forEach(item => {
+        const date = new Date(item.dt_txt).toLocaleDateString();
+        const temp = item.main.temp;
+        const row = table.insertRow();
+        row.innerHTML = `<td>${date}</td><td>${temp}</td>`;
+      });
+    }
+  </script>
+</body>
+</html>

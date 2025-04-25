@@ -1,0 +1,85 @@
+a. Create a Git repository, add and commit a simple web application (5 pages)
+1.	Initialize a Git repository locally:
+bash
+CopyEdit
+mkdir simple-web-app
+cd simple-web-app
+git init
+2.	Create 5 simple HTML pages (example):
+bash
+CopyEdit
+touch index.html about.html contact.html services.html portfolio.html
+3.	Add content to the files (example for index.html):
+html
+CopyEdit
+<!-- index.html -->
+<html>
+<head><title>Home</title></head>
+<body><h1>Welcome to My Site</h1></body>
+</html>
+4.	Add and commit files to Git:
+bash
+CopyEdit
+git add .
+git commit -m "Initial commit: Added 5-page web application"
+________________________________________
+b. Create a remote repo and push local repo to GitHub
+1.	Go to GitHub and create a new repository (e.g., simple-web-app)
+2.	Link the local repo to remote:
+bash
+CopyEdit
+git remote add origin https://github.com/your-username/simple-web-app.git
+git branch -M main
+git push -u origin main
+3.	Explore push, pull, fetch:
+o	Push: Send local changes to GitHub:
+bash
+CopyEdit
+git push
+o	Pull: Pull latest changes from GitHub:
+bash
+CopyEdit
+git pull
+o	Fetch: Fetch changes without merging:
+bash
+CopyEdit
+git fetch
+git log origin/main  # View commits from remote
+________________________________________
+c. Clone a repository, modify and push back
+1.	Clone repository to new directory:
+bash
+CopyEdit
+git clone https://github.com/your-username/simple-web-app.git cloned-web-app
+cd cloned-web-app
+2.	Make changes (e.g., update about.html):
+bash
+CopyEdit
+echo "<p>Updated About Page</p>" >> about.html
+git add about.html
+git commit -m "Updated About Page"
+git push
+________________________________________
+d. Create branches, distribute work, and merge
+1.	Create and switch to new branches:
+bash
+CopyEdit
+git checkout -b feature-header
+# Modify header in index.html
+git add index.html
+git commit -m "Added new header section"
+git push -u origin feature-header
+2.	Repeat for other features if needed. Then merge:
+bash
+CopyEdit
+git checkout main
+git pull
+git merge feature-header
+git push
+________________________________________
+e. Publish using GitHub Pages
+1.	Go to repository settings on GitHub.
+2.	Scroll to Pages section.
+3.	Set source as main branch and root directory.
+4.	Save it — GitHub will provide a link like:
+https://your-username.github.io/simple-web-app/
