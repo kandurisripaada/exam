@@ -54,17 +54,15 @@ console.log(util.inspect(obj, { depth: null }));
 
 // Events Module
 const EventEmitter = require('events');
-
-// Create event emitter instance
 const emitter = new EventEmitter();
-
-// Define an event handler
 emitter.on('greet', (name) => {
     console.log(`Hello, ${name}!`);
 });
 
 // Emit the event
-emitter.emit('greet', 'Alice'); ________________________________________
+emitter.emit('greet', 'Alice');
+
+________________________________________
 ✅ c. Use fs module to Create Directories and Files
 javascript
 CopyEdit

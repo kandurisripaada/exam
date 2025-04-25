@@ -32,7 +32,7 @@ app.post("/products", (req, res) => {
 });
 
 app.put("/products/:id", (req, res) => {
-  const { id } = req.params;
+  const { id } = req.params.id;
   const { name } = req.body;
 
   const product = products.find((p) => p.id === parseInt(id));
@@ -45,7 +45,7 @@ app.put("/products/:id", (req, res) => {
 });
 
 app.delete("/products/:id", (req, res) => {
-  const { id } = req.params;
+  const { id } = req.params.id;
 
   const index = products.findIndex((p) => p.id === parseInt(id));
   if (index === -1) {
